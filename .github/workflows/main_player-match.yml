@@ -27,8 +27,8 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: my-artifact
-          path: path/to/artifact/
+          name: server_MatchCraft
+          path: '${{ github.workspace }}/target/*.jar'
 
   deploy:
     runs-on: windows-latest
@@ -43,7 +43,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: my-artifact
+          name: server_MatchCraft
       
       - name: Login to Azure
         uses: azure/login@v1
@@ -58,5 +58,5 @@ jobs:
         with:
           app-name: 'player-match'
           slot-name: 'Production'
-          package: '*.war'
+          package: '*.jar'
           
